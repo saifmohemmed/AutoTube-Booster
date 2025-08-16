@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>يتعلم البرمجة بنفسك</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg-primary: #020617; /* Slate 950 */
+        --accent-primary: #38bdf8; /* Sky 400 */
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: 'Tajawal', sans-serif;
+        background-color: var(--bg-primary);
+        /* A more professional, subtle background texture */
+        background-image:
+          radial-gradient(at 10% 20%, hsla(212, 90%, 30%, 0.15) 0px, transparent 50%),
+          radial-gradient(at 85% 75%, hsla(260, 80%, 40%, 0.1) 0px, transparent 50%);
+      }
+      /* Refined animation keyframes for a professional feel */
+      @keyframes fade-in-up {
+        from { opacity: 0; transform: translateY(25px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes fade-in-right {
+        from { opacity: 0; transform: translateX(-25px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+      @keyframes fade-in-left {
+        from { opacity: 0; transform: translateX(25px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+       @keyframes pulse-ring {
+        0% {
+          transform: scale(0.95);
+          box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7);
+        }
+        70% {
+          transform: scale(1);
+          box-shadow: 0 0 0 10px rgba(56, 189, 248, 0);
+        }
+        100% {
+          transform: scale(0.95);
+          box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
+        }
+      }
+       @keyframes float-glow {
+        0%, 100% {
+          transform: translateY(0) rotateX(-15deg) rotateY(15deg);
+          box-shadow: 0 20px 25px -5px rgba(56, 189, 248, 0.2), 0 8px 10px -6px rgba(56, 189, 248, 0.2);
+        }
+        50% {
+          transform: translateY(-15px) rotateX(-15deg) rotateY(15deg);
+          box-shadow: 0 30px 35px -5px rgba(56, 189, 248, 0.3), 0 12px 15px -6px rgba(56, 189, 248, 0.3);
+        }
+      }
+      .animate-fade-in-right { animation: fade-in-right 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+      .animate-fade-in-left { animation: fade-in-left 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+      .animate-fade-in-up { animation: fade-in-up 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+      .animate-pulse-ring { animation: pulse-ring 2s infinite; }
+      
+      /* 3D GameDev Styles */
+      .gamedev-scene-container {
+        perspective: 1000px;
+      }
+      .gamedev-scene {
+        transform-style: preserve-3d;
+        transition: transform 0.5s ease-out;
+      }
+      .gamedev-floor {
+        transform: rotateX(90deg) translateZ(-50px);
+        background-image: 
+          linear-gradient(rgba(2, 6, 23, 0.8), rgba(2, 6, 23, 0.8)),
+          radial-gradient(circle, #0c4a6e 1px, transparent 1px);
+        background-size: 100%, 100%, 50px 50px;
+      }
+      .gamedev-object, .gamedev-player {
+        transform-style: preserve-3d;
+        transition: transform 0.3s linear;
+      }
+      .gamedev-challenge-obj {
+        animation: float-glow 4s infinite ease-in-out;
+      }
+      .gamedev-block-3d {
+        transform-style: preserve-3d;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        transform: rotateX(-10deg) rotateY(15deg);
+        transition: transform 0.2s;
+      }
+       .gamedev-block-3d:hover {
+        transform: rotateX(-5deg) rotateY(10deg) scale(1.05);
+       }
+      .block-face {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+      }
+      .block-front {
+        transform: translateZ(8px);
+      }
+      .block-back {
+        transform: rotateY(180deg) translateZ(8px);
+      }
+      .block-top {
+        height: 16px;
+        transform: rotateX(90deg) translateY(-8px);
+        transform-origin: top;
+      }
+      .block-bottom {
+        height: 16px;
+        transform: rotateX(-90deg) translateY(8px);
+        transform-origin: bottom;
+      }
+       .block-left {
+        width: 16px;
+        transform: rotateY(-90deg) translateX(-8px);
+        transform-origin: left;
+      }
+      .block-right {
+        width: 16px;
+        transform: rotateY(90deg) translateX(8px);
+        transform-origin: right;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.8.0",
+    "react/": "https://esm.sh/react@^19.1.1/",
+    "react": "https://esm.sh/react@^19.1.1",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.1/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.14.0"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-950">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
